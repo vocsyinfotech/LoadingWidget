@@ -23,6 +23,7 @@ class _VideoWidgetState extends State<VideoWidget> {
       // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
       setState(() {});
     });
+    print('ll ::::  ${widget.play}');
 
     if (widget.play) {
       _controller.play();

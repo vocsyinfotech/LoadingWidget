@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:inview_notifier_list/inview_notifier_list.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'box.dart';
 
@@ -25,6 +27,24 @@ class MyList extends StatelessWidget {
         (double deltaTop, double deltaBottom, double vpHeight) {
           return deltaTop < (0.5 * vpHeight) && deltaBottom > (0.5 * vpHeight);
         };
+    RefreshController _refreshController =
+        RefreshController(initialRefresh: false);
+
+    void _onRefresh() async {
+      // monitor network fetch
+      print('============PAGE===============');
+      await Future.delayed(Duration(milliseconds: 1000));
+      // if failed,use refreshFailed()
+      _refreshController.refreshCompleted();
+    }
+
+    void _onLoading() async {
+      // monitor network fetch
+      await Future.delayed(Duration(milliseconds: 1000));
+      // if failed,use loadFailed(),if no data return,use LoadNodata()
+      print('============PAGE===============');
+      _refreshController.loadComplete();
+    }
 
     return Stack(
       fit: StackFit.expand,
